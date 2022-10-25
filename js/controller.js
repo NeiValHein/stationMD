@@ -1,59 +1,67 @@
-window.samplePWA = typeof window.samplePWA === 'undefined' ? {} : window.samplePWA;
-window.samplePWA.functions = typeof window.samplePWA.functions === 'undefined' ? {} : window.samplePWA.functions;
+window.stationMD = typeof window.stationMD === 'undefined' ? {} : window.stationMD;
+window.stationMD.functions = typeof window.stationMD.functions === 'undefined' ? {} : window.stationMD.functions;
 
-window.samplePWA.functions.startEnviroment = function startEnviroment() {
+window.stationMD.functions.startEnviroment = function startEnviroment() {
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/sw.js')
+		navigator.serviceWorker.register('/get-app/sw.js')
 		.then(reg => console.log('SW: Registered. Scope: ', reg.scope))
 		.catch(err => console.warn('SW: Error while registering. Error: ', err))
 	}
 	let pwa = true;
 	if (pwa) {
-		window.samplePWA.functions.PWAController();
+		window.stationMD.functions.PWAController();
 	}
 };
-window.samplePWA.functions.PWAController = function PWAController() {
+window.stationMD.functions.PWAController = function PWAController() {
 	let deferredPrompt;
 	const userAgent = window.navigator.userAgent.toLowerCase();
 	const ios = /iphone|ipod|ipad/.test(userAgent);
+	const android = /android/.test(userAgent);
+	const safari = /safari/.test(userAgent);
+	const firefoxBrowser = /firefox/.test(userAgent);
+	const operaBrowser = /opera|opr\//.test(userAgent)
+	const safariBrowser = typeof window.GestureEvent === "function";
+	const macOS = /(macintosh|macintel|macppc|mac68k|macos)/.test(userAgent);
+	const edgeBrowser = /edg\//.test(userAgent);
 	window.addEventListener('beforeinstallprompt', (e) => {
 		deferredPrompt = e;
 		localStorage.setItem('event_fired', true);
 	});
 	setTimeout(() => {
-		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !ios || window.matchMedia('(display-mode: standalone)').matches) {
-			window.location.replace("https://staging.stationmd.com/zoom-token");
+		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !ios || window.matchMedia('(display-mode: standalone)').matches || ios || firefoxBrowser || operaBrowser || safariBrowser) {
+			window.location.replace("https://connect.stationmd.com/zoom-token");
 		} else {
+			let container = document.getElementById('container');
 			let html = document.createElement('div');
-			html.innerHTML = `<img src="/stationMD/img/assets/logo.png" class="img-fluid" alt="Logo" style="max-height: 75px;">
+			html.innerHTML = `<img src="/wp-content/img/assets/logo.png" class="img-fluid items-header" alt="StationMD Logo">
 			<div class="container">
 			<div class="row">
 			<div class="column-0">
 			<div class="row">
 			<div class="item" id="pwa-card">
-			<img src="/stationMD/img/assets/browsers.png" class="big-img img-fluid" alt="Chrome Logo">
+			<img src="/wp-content/img/assets/browsers.png" class="big-img img-fluid" alt="Chrome Logo">
 			<h2> StationMD Desktop / Laptop Application</h2>
 			<p id="pwa-message">To install this application on to your desktop or laptop device, simply click on the <br><strong> ADD TO HOME SCREEN </strong> button below and then click <strong>Install</strong>.</p>
 			<button class="pwa-btn install-btn" id="pwa-install">ADD TO HOME SCREEN</button>
 			</div>
 			<div class="item-divider"></div>
 			<div class="item">
-			<img src="/stationMD/img/assets/qr.png" class="big-img img-fluid" alt="QR Code">
+			<img src="/wp-content/img/assets/qr.png" class="big-img img-fluid" alt="QR Code">
 			<h2>StationMD Mobile Application</h2>
 			<p>Open the built-in camera app. Point the camera at the QR code. Tap the banner that appears on your Android or iOS device. Follow the instructions on the screen to finish installation.</p>
-			<img src="/stationMD/img/assets/play-store.png" class="small-img img-fluid margin-r-5" alt="get the mobile application by scanning the QR code">
-			<img src="/stationMD/img/assets/app-store.png" class="small-img img-fluid" alt="get the mobile application by scanning the QR code">
+			<a href="https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US"><img src="/wp-content/img/assets/play-store.png" class="small-img img-fluid margin-r-5" alt="get the mobile application by scanning the QR code"></a>
+			<a href="https://apps.apple.com/us/app/stationmd/id1476404286"><img src="/wp-content/img/assets/app-store.png" class="small-img img-fluid" alt="get the mobile application by scanning the QR code"></a>
 			</div>
 			</div>
 			</div>
 			</div>
 			</div>`;
-			document.body.innerHTML = '';
-			document.body.appendChild(html);
+			container.innerHTML = '';
+			container.appendChild(html);
+			let pwaFooter = document.body.querySelector('#pwa-footer');
 			let installCard = document.body.querySelector('#pwa-card');
 			let installMsg = document.body.querySelector('#pwa-message');
 			let installBtn = document.body.querySelector('#pwa-install');
-			const safari = /safari/.test(userAgent);
 			if (installBtn) {
 				if (ios) {
 					if (safari) {
@@ -71,6 +79,7 @@ window.samplePWA.functions.PWAController = function PWAController() {
 					installMsg.innerHTML = 'To install this application on to your desktop or laptop device, simply click on the <br><strong> ADD TO HOME SCREEN </strong> button below and then click <strong>Install</strong>.</p>';
 				}
 			}
+			pwaFooter.style.display = 'block';
 			installCard.style.display = 'block';
 			installBtn.style.display = 'initial';
 			installBtn.addEventListener('click', async () => {
@@ -78,17 +87,31 @@ window.samplePWA.functions.PWAController = function PWAController() {
 					deferredPrompt.prompt();
 					const { outcome } = await deferredPrompt.userChoice;
 					if (outcome === 'accepted') {
-						console.log('navigator via deferredPrompt');
-						window.location.replace("https://staging.stationmd.com/zoom-token");
+						if (!android || !ios) {
+							console.log('both conditionals are false')
+							if (!edgeBrowser) {
+								window.location.replace("https://connect.stationmd.com/zoom-token");
+							} else if (macOS) {
+								window.location.replace("https://connect.stationmd.com/zoom-token");
+							}						
+						} else if (android) {
+							console.log('android conditional are true')
+
+							window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
+						} else if (ios) {
+							console.log('ios conditional are true')
+
+							window.location.replace("https://apps.apple.com/us/app/stationmd/id1476404286");	
+						}
 						deferredPrompt = null;
 						installMsg.innerHTML = 'Thank you for installing our pwa.';
-						installBtn.remove(); 
+						installBtn.remove();
 					}
 				}
 			});
 		}
-	}, 2500);
+	}, 1500);
 };
 (function () {
-	window.samplePWA.functions.startEnviroment();
+	window.stationMD.functions.startEnviroment();
 })();
