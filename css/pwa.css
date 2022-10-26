@@ -25,13 +25,12 @@ body {
 	color: var(--color-font);
 	text-align: center;
 	background-color: var(--color-primary);
-
 }
-a {
-	text-decoration: none;
+footer {
+	text-align: left;
 }
-button {
-	cursor: pointer;
+footer h6 {
+	font-size: 20px;
 }
 .container {
 	display: flex;
@@ -58,10 +57,12 @@ button {
 	max-width: 100%;
 	margin-bottom: 2rem;
 }
+.items-header {
+	max-height: 75px;
+}
 .item {
 	flex: 1;
 	margin: 15px;
-	padding: 30px;
 	background: var(--color-secondary);
 	border: 0px solid var(--color-button);
 	border-radius: 6px;
@@ -72,7 +73,6 @@ button {
 	background: var(--color-button);
 	width: 6px;
 	margin-top: 25px;
-	margin-bottom: -75px;
 	border-radius: 6px;
 	z-index: 0;
 }
@@ -107,7 +107,7 @@ button {
 	filter: opacity(0.8);
 	cursor: pointer;
 }
-#pwa-btn, #pwa-popup, #pwa-install {
+#pwa-btn, #pwa-popup, #pwa-install, #pwa-footer {
 	display: none;
 }
 .overlay {
@@ -264,14 +264,14 @@ button {
 	cursor: progress;
 }
 .logo {
-	animation: bounce 2s ease infinite;	
+	animation: pwa-bounce 2s ease infinite;	
 }
 @keyframes spin {
 	100% {
 		transform: rotate(360deg);
 	}
 }
-@keyframes bounce {
+@keyframes pwa-bounce {
 	0% {
 		transform: scale(0.9);
 	}
