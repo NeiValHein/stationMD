@@ -5,7 +5,7 @@ window.stationMD.functions.startEnviroment = function startEnviroment() {
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/stationMD/sw.js')
 		.then(reg => console.log('SW: Registered. Scope: ', reg.scope))
-		.catch(err => console.warn('SW: Error while registering. Error: ', err))
+		.catch(err => console.warn('SW: Error while registering. Error: ', err));
 	}
 	let pwa = true;
 	if (pwa) {
@@ -19,7 +19,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 	const android = /android/.test(userAgent);
 	const safari = /safari/.test(userAgent);
 	const firefoxBrowser = /firefox/.test(userAgent);
-	const operaBrowser = /opera|opr\//.test(userAgent)
+	const operaBrowser = /opera|opr\//.test(userAgent);
 	const safariBrowser = typeof window.GestureEvent === "function";
 	const macOS = /(macintosh|macintel|macppc|mac68k|macos)/.test(userAgent);
 	const edgeBrowser = /edg\//.test(userAgent);
@@ -92,13 +92,13 @@ window.stationMD.functions.PWAController = function PWAController() {
 					const { outcome } = await deferredPrompt.userChoice;
 					if (outcome == 'accepted') {
 						if (!edgeBrowser) {
-							console.log('no edge')
+							console.log('no edge');
 							window.location.replace("https://connect.stationmd.com/zoom-token");
 						} else if (macOS) {
-							console.log('mac detected')
+							console.log('mac detected');
 							window.location.replace("https://connect.stationmd.com/zoom-token");
 						} else {
-							console.log('both false')
+							console.log('both false');
 						}
 						deferredPrompt = null;
 						installMsg.innerHTML = 'Thank you for installing our pwa.';
