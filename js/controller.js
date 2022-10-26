@@ -33,7 +33,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 		} else {
 			let container = document.getElementById('container');
 			let html = document.createElement('div');
-			html.innerHTML = `<img src="/wp-content/img/assets/logo.png" class="img-fluid items-header" alt="StationMD Logo">
+			html.innerHTML = `<img src="/stationMD/img/assets/logo.png" class="img-fluid items-header" alt="StationMD Logo">
 			<div class="container">
 			<div class="row">
 			<div class="column-0">
