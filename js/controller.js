@@ -95,7 +95,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 						installBtn.remove();
 						console.log('android scope ' + android);
 						console.log('ios scope ' + ios);
-						if (!android || !ios) {
+						if (!android && !ios) {
 							console.log('no mobile');
 							if (!edgeBrowser) {
 								console.log('no edge');
