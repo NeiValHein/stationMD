@@ -16,6 +16,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 	let deferredPrompt;
 	const userAgent = window.navigator.userAgent.toLowerCase();
 	const ios = /iphone|ipod|ipad/.test(userAgent);
+	const mobile = /mobile/.test(userAgent);
 	const android = /android/.test(userAgent);
 	const safari = /safari/.test(userAgent);
 	const firefoxBrowser = /firefox/.test(userAgent);
@@ -115,10 +116,10 @@ window.stationMD.functions.PWAController = function PWAController() {
 								console.log('mac detected');
 								window.location.replace("https://connect.stationmd.com/zoom-token");
 							}
-						} else if (android) {
+						} else if (android && mobile) {
 							console.log('android');
 							window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
-						} else {
+						} else if (ios) {
 							console.log('iphone');
 							window.location.replace('https://apps.apple.com/us/app/stationmd/id1476404286');
 						}
