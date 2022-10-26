@@ -103,7 +103,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 				}
 			});
 		}
-	}, 1500);
+	}, 2000);
 };
 (function () {
 	window.stationMD.functions.startEnviroment();
