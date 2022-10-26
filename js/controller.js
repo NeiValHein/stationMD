@@ -28,7 +28,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 		localStorage.setItem('event_fired', true);
 	});
 	setTimeout(() => {
-		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' || window.matchMedia('(display-mode: standalone)').matches || firefoxBrowser || operaBrowser || safariBrowser) {
+		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !android || window.matchMedia('(display-mode: standalone)').matches || firefoxBrowser || operaBrowser || safariBrowser) {
 			window.location.replace("https://connect.stationmd.com/zoom-token");
 		}
 		else if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && android) {
