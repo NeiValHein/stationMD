@@ -24,6 +24,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 	const macOS = /(macintosh|macintel|macppc|mac68k|macos)/.test(userAgent);
 	const edgeBrowser = /edg\//.test(userAgent);
 	window.addEventListener('beforeinstallprompt', (e) => {
+		console.log('deferredPrompt assigned with value ' + e);
 		deferredPrompt = e;
 		localStorage.setItem('event_fired', true);
 	});
@@ -83,7 +84,10 @@ window.stationMD.functions.PWAController = function PWAController() {
 			installCard.style.display = 'block';
 			installBtn.style.display = 'initial';
 			installBtn.addEventListener('click', async () => {
+				console.log('deferredPrompt not passed ' + deferredPrompt);
+
 				if (deferredPrompt != null && deferredPrompt != 'undefined') {
+					console.log('deferredPrompt detected ' + deferredPrompt);
 					deferredPrompt.prompt();
 					const { outcome } = await deferredPrompt.userChoice;
 					if (outcome == 'accepted') {
