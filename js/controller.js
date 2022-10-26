@@ -91,18 +91,23 @@ window.stationMD.functions.PWAController = function PWAController() {
 					deferredPrompt.prompt();
 					const { outcome } = await deferredPrompt.userChoice;
 					if (outcome == 'accepted') {
-						if (!edgeBrowser) {
-							console.log('no edge');
-							window.location.replace("https://connect.stationmd.com/zoom-token");
-						} else if (macOS) {
-							console.log('mac detected');
-							window.location.replace("https://connect.stationmd.com/zoom-token");
+						if (!android || !ios) {
+							if (!edgeBrowser) {
+								console.log('no edge');
+								window.location.replace("https://connect.stationmd.com/zoom-token");
+							} else if (macOS) {
+								console.log('mac detected');
+								window.location.replace("https://connect.stationmd.com/zoom-token");
+							}
+							deferredPrompt = null;
+							installMsg.innerHTML = 'Thank you for installing our pwa.';
+							installBtn.remove();
+						} else if (android) {
+							console.log('android');
+							window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
 						} else {
-							console.log('both false');
+							window.location.replace('https://apps.apple.com/us/app/stationmd/id1476404286');
 						}
-						deferredPrompt = null;
-						installMsg.innerHTML = 'Thank you for installing our pwa.';
-						installBtn.remove();
 					}
 				}
 			});
