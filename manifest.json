@@ -6,58 +6,25 @@
   "theme_color": "#FFFFFF",
   "orientation": "any",
   "display": "standalone",
-  "start_url": "/StationMD/welcome.html",
+  "start_url": "/stationMD/welcome.html",
   "scope": ".",
   "lang": "en-US",
   "icons": [
     {
-      "src": "/StationMD/img/pwa/pwa.svg",
+      "src": "/stationMD/img/pwa/pwa.svg",
       "sizes": "any",
       "type": "image/svg"
     },
     {
-      "src": "/StationMD/img/pwa/512.png",
+      "src": "/stationMD/img/pwa/512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/StationMD/img/pwa/maskable_icon.png",
+      "src": "/stationMD/img/pwa/maskable_icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/StationMD/img/pwa/desc-1.png",
-      "type": "image/png",
-      "sizes": "540x720"
-    },
-    {
-      "src": "/StationMD/img/pwa/desc-2.png",
-      "type": "image/jpg",
-      "sizes": "540x720"
-    },
-    {
-      "src": "/StationMD/img/pwa/desc-3.png",
-      "type": "image/jpg",
-      "sizes": "540x720"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Sample PWA Shortcut #1",
-      "short_name": "Shortcut #1",
-      "description": "Sample PWA Shortcut Description #1.",
-      "url": "/StationMD/sample-pwa-shortcut-1.html",
-      "icons": [{ "src": "/StationMD/img/pwa/maskable_icon.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Sample PWA Shortcut #2",
-      "short_name": "Shortcut #2",
-      "description": "Sample PWA Shortcut Description #2.",
-      "url": "/StationMD/sample-pwa-shortcut-2.html",
-      "icons": [{ "src": "/StationMD/img/pwa/maskable_icon.png", "sizes": "192x192" }]
     }
   ]
 }
