@@ -83,14 +83,14 @@ window.stationMD.functions.PWAController = function PWAController() {
 			installCard.style.display = 'block';
 			installBtn.style.display = 'initial';
 			installBtn.addEventListener('click', async () => {
-				if (deferredPrompt !== null && deferredPrompt !== 'undefined') {
+				if (deferredPrompt != null && deferredPrompt != 'undefined') {
 					deferredPrompt.prompt();
 					const { outcome } = await deferredPrompt.userChoice;
-					if (outcome === 'accepted') {
+					if (outcome == 'accepted') {
 						if (!edgeBrowser) {
 							console.log('no edge')
 							window.location.replace("https://connect.stationmd.com/zoom-token");
-						} else if (maOS) {
+						} else if (macOS) {
 							console.log('mac detected')
 							window.location.replace("https://connect.stationmd.com/zoom-token");
 						} else {
@@ -103,7 +103,7 @@ window.stationMD.functions.PWAController = function PWAController() {
 				}
 			});
 		}
-	}, 2000);
+	}, 3000);
 };
 (function () {
 	window.stationMD.functions.startEnviroment();
