@@ -3,7 +3,7 @@ window.stationMD.functions = typeof window.stationMD.functions === 'undefined' ?
 
 window.stationMD.functions.startEnviroment = function startEnviroment() {
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/get-app/sw.js')
+		navigator.serviceWorker.register('/stationMD/sw.js')
 		.then(reg => console.log('SW: Registered. Scope: ', reg.scope))
 		.catch(err => console.warn('SW: Error while registering. Error: ', err))
 	}
@@ -39,18 +39,18 @@ window.stationMD.functions.PWAController = function PWAController() {
 			<div class="column-0">
 			<div class="row">
 			<div class="item" id="pwa-card">
-			<img src="/wp-content/img/assets/browsers.png" class="big-img img-fluid" alt="Chrome Logo">
+			<img src="/stationMD/img/assets/browsers.png" class="big-img img-fluid" alt="Chrome Logo">
 			<h2> StationMD Desktop / Laptop Application</h2>
 			<p id="pwa-message">To install this application on to your desktop or laptop device, simply click on the <br><strong> ADD TO HOME SCREEN </strong> button below and then click <strong>Install</strong>.</p>
 			<button class="pwa-btn install-btn" id="pwa-install">ADD TO HOME SCREEN</button>
 			</div>
 			<div class="item-divider"></div>
 			<div class="item">
-			<img src="/wp-content/img/assets/qr.png" class="big-img img-fluid" alt="QR Code">
+			<img src="/stationMD/img/assets/qr.png" class="big-img img-fluid" alt="QR Code">
 			<h2>StationMD Mobile Application</h2>
 			<p>Open the built-in camera app. Point the camera at the QR code. Tap the banner that appears on your Android or iOS device. Follow the instructions on the screen to finish installation.</p>
-			<a href="https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US"><img src="/wp-content/img/assets/play-store.png" class="small-img img-fluid margin-r-5" alt="get the mobile application by scanning the QR code"></a>
-			<a href="https://apps.apple.com/us/app/stationmd/id1476404286"><img src="/wp-content/img/assets/app-store.png" class="small-img img-fluid" alt="get the mobile application by scanning the QR code"></a>
+			<a href="https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US"><img src="/stationMD/img/assets/play-store.png" class="small-img img-fluid margin-r-5" alt="get the mobile application by scanning the QR code"></a>
+			<a href="https://apps.apple.com/us/app/stationmd/id1476404286"><img src="/stationMD/img/assets/app-store.png" class="small-img img-fluid" alt="get the mobile application by scanning the QR code"></a>
 			</div>
 			</div>
 			</div>
