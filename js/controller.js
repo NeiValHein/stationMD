@@ -28,9 +28,19 @@ window.stationMD.functions.PWAController = function PWAController() {
 		localStorage.setItem('event_fired', true);
 	});
 	setTimeout(() => {
-		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !ios || window.matchMedia('(display-mode: standalone)').matches || ios || firefoxBrowser || operaBrowser || safariBrowser) {
+		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' || window.matchMedia('(display-mode: standalone)').matches || firefoxBrowser || operaBrowser || safariBrowser) {
 			window.location.replace("https://connect.stationmd.com/zoom-token");
-		} else {
+		}
+		else if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && android) {
+			console.log('android');
+			window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
+		} else if (ios) {
+			console.log('iphone');
+			window.location.replace('https://apps.apple.com/us/app/stationmd/id1476404286');
+		}
+
+
+		else {
 			let container = document.getElementById('container');
 			let html = document.createElement('div');
 			html.innerHTML = `<img src="/stationMD/img/assets/logo.png" class="img-fluid items-header" alt="StationMD Logo">
@@ -109,7 +119,6 @@ window.stationMD.functions.PWAController = function PWAController() {
 							window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
 						} else {
 							console.log('iphone');
-
 							window.location.replace('https://apps.apple.com/us/app/stationmd/id1476404286');
 						}
 					}
