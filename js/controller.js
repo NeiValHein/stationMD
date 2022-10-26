@@ -28,14 +28,14 @@ window.stationMD.functions.PWAController = function PWAController() {
 		localStorage.setItem('event_fired', true);
 	});
 	setTimeout(() => {
-		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !android || window.matchMedia('(display-mode: standalone)').matches && !android || firefoxBrowser || operaBrowser || safariBrowser && !ios) {
+		if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && !android || window.matchMedia('(display-mode: standalone)').matches && !android && !ios || firefoxBrowser || operaBrowser || safariBrowser && !ios) {
 			window.location.replace("https://connect.stationmd.com/zoom-token");
 		}
-		else if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && android) {
-			console.log('android');
+		else if (!deferredPrompt && localStorage.getItem('event_fired') == 'true' && android || window.matchMedia('(display-mode: standalone)').matches && android) {
+			console.log('android installed');
 			window.location.replace("https://play.google.com/store/apps/details?id=com.stationmd.stationmd&gl=US");
-		} else if (ios) {
-			console.log('iphone');
+		} else if (window.matchMedia('(display-mode: standalone)').matches && ios) {
+			console.log('iphone installed');
 			window.location.replace('https://apps.apple.com/us/app/stationmd/id1476404286');
 		}
 
